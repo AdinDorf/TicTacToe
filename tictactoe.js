@@ -23,6 +23,7 @@ const Gameboard = function() {
 
     //return active, a symbol, or cats
     }
+
 }
 
 const Player = (sign) => {
@@ -44,12 +45,12 @@ const GameManager = (function () {
     let activePlayer = player2;
     
     //Loop through the game until a winner is found
-    while (board.checkState == 'active')
+    while (board.checkState() == 'active')
     {
         //Swap Active Player
-
+        activePlayer = activePlayer === player1 ? player2 : player1;
         //Place tile
-
+        setTile(index, activePlayer.getSign());
     }
 
 
