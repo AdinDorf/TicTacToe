@@ -43,27 +43,26 @@ const Gameboard = function() {
     return {board, getBoard, getTile, setTile, checkState};
 };
 
-const Player = (sign) => {
-    this.sign = sign;
+function createPlayer(symbol, name) {
 
-    const getSign = () => {
-        return sign;
-    };
+    const getSymbol = () => symbol;
 
+    return {symbol, name}
 };
 
 const GameManager = (function () {
     console.log("Game Manager running!");
     //Initialize Objects
-    const player1 = Player("X");
-    const player2 = Player("O");
+    const player1 = createPlayer("X","John");
+    const player2 = createPlayer("O", "Jane");
     const board = Gameboard();
 
     console.log(board.getBoard());
     
-    let activePlayer = player2;
+    let activePlayer = player1;
     
     console.log(board.checkState());
+    console.log(activePlayer);
     //Loop through the game until a winner is found
     
     while (board.checkState() === 'active')
@@ -74,7 +73,7 @@ const GameManager = (function () {
         activePlayer = activePlayer === player1 ? player2 : player1;
         //Place tile
         let index = prompt("Pick a move");
-        board.setTile(index, activePlayer.getSign());
+        board.setTile(index, activePlayer);
     }
 
     console.log("game over");
