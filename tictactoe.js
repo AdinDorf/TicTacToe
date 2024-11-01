@@ -1,4 +1,4 @@
-const Gameboard = function() {
+function createGameboard() {
     const board = new Array(9).fill("");
 
     const getBoard = () => {
@@ -26,40 +26,40 @@ const Gameboard = function() {
         [1, 5, 9],
         [3, 5, 7],
         ];
+
+        let state = 'active';
         //Check if the game fits a win condition
         winPositions.forEach(position => {
             if (board[position[0]] === board[position[1]]  && board[position[0]] === board[position[2]] && board[position[0]] !== "")
             {
-                return board[position[1]];
+                console.log("IT HAPPENED");
+                state = 'end';
             }
         });
 
-        return 'active';
+        return state;
         //return active, a symbol, or cats
     };
 
 
 
-    return {board, getBoard, getTile, setTile, checkState};
+    return {getBoard, getTile, setTile, checkState};
 };
 
 function createPlayer(symbol, name) {
-
-    const getSymbol = () => symbol;
-
     return {symbol, name}
 };
 
 const GameManager = (function () {
     console.log("Game Manager running!");
     //Initialize Objects
-    const player1 = createPlayer("X","John");
+    const player1 = createPlayer("X", "John");
     const player2 = createPlayer("O", "Jane");
-    const board = Gameboard();
+    const board = createGameboard();
 
     console.log(board.getBoard());
     
-    let activePlayer = player1;
+    let activePlayer = player2;
     
     console.log(board.checkState());
     console.log(activePlayer);
@@ -67,8 +67,9 @@ const GameManager = (function () {
     
     while (board.checkState() === 'active')
     {
+
         //Display the current board
-        console.log(board);
+        console.log(board.checkState(),board);
         //Swap Active Player
         activePlayer = activePlayer === player1 ? player2 : player1;
         //Place tile
@@ -77,5 +78,6 @@ const GameManager = (function () {
     }
 
     console.log("game over");
+    console.log(activePlayer.name +  " wins");
 
 })();
