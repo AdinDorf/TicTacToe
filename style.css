@@ -1,0 +1,12 @@
+.boardContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 0px;
+}
+
+.cell {
+    height: 100px;
+    width: 100px;
+    border: 2px solid black;
+}
+
